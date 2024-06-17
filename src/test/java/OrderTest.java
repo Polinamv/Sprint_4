@@ -10,39 +10,39 @@ import java.time.format.DateTimeFormatter;
 
 public class OrderTest extends BaseTest {
 
-    private final String username;
-    private final String userLastName;
-    private final String userAddress;
-    private final int metroStationId;
-    private final String userPhoneNumber;
-    private final String date;
-    private final String rentDaysText;
-    private final String scooterColorId;
-    private final String comment;
-    private final String orderButtonName;
+    private final String USERNAME;
+    private final String USER_LAST_NAME;
+    private final String USER_ADDRESS;
+    private final int METRO_STATION_ID;
+    private final String USER_PHONE_NUMBER;
+    private final String DATE;
+    private final String RENT_DAYS_TEXT;
+    private final String SCOOTER_COLOR;
+    private final String COMMENT;
+    private final String ORDER_BUTTON_NAME;
 
     public OrderTest(
-            String username,
-            String userLastName,
-            String userAddress,
-            int metroStationId,
-            String userPhoneNumber,
-            String date,
-            String rentDaysText,
-            String scooterColorId,
-            String comment,
-            String orderButtonName
+            String USERNAME,
+            String USER_LAST_NAME,
+            String USER_ADDRESS,
+            int METRO_STATION_ID,
+            String USER_PHONE_NUMBER,
+            String DATE,
+            String RENT_DAYS_TEXT,
+            String SCOOTER_COLOR,
+            String COMMENT,
+            String ORDER_BUTTON_NAME
     ) {
-        this.username = username;
-        this.userLastName = userLastName;
-        this.userAddress = userAddress;
-        this.metroStationId = metroStationId;
-        this.userPhoneNumber = userPhoneNumber;
-        this.date = date;
-        this.rentDaysText = rentDaysText;
-        this.scooterColorId = scooterColorId;
-        this.comment = comment;
-        this.orderButtonName = orderButtonName;
+        this.USERNAME = USERNAME;
+        this.USER_LAST_NAME = USER_LAST_NAME;
+        this.USER_ADDRESS = USER_ADDRESS;
+        this.METRO_STATION_ID = METRO_STATION_ID;
+        this.USER_PHONE_NUMBER = USER_PHONE_NUMBER;
+        this.DATE = DATE;
+        this.RENT_DAYS_TEXT = RENT_DAYS_TEXT;
+        this.SCOOTER_COLOR = SCOOTER_COLOR;
+        this.COMMENT = COMMENT;
+        this.ORDER_BUTTON_NAME = ORDER_BUTTON_NAME;
     }
 
     @Parameterized.Parameters
@@ -52,25 +52,25 @@ public class OrderTest extends BaseTest {
                         "Геннадий",
                         "Горин",
                         "Садовая 113а",
-                        ClientDataOrderPage.firstMetroStationId,
+                        ClientDataOrderPage.FIRST_METRO_STATION_ID,
                         "79812345677",
-                        LocalDateTime.now().plusDays(1).format(dateFormatter),
-                        RentDataOrderPage.oneDayRentText,
-                        RentDataOrderPage.scooterColorBlackId,
+                        LocalDateTime.now().plusDays(1).format(DATE_FORMATTER),
+                        RentDataOrderPage.ONE_DAY_RENT_TEXT,
+                        RentDataOrderPage.SCOOTER_COLOR_BLACK_ID,
                         "Привезите как можно скорее",
-                        MainPage.upperOrderButtonName
+                        MainPage.UPPER_ORDER_BUTTON_NAME
                 },
                 {
                         "Александр",
                         "Санин",
                         "пер. Пролетарский 88",
-                        ClientDataOrderPage.secondMetroStationId,
+                        ClientDataOrderPage.SECOND_METRO_STATION_ID,
                         "897746573322",
-                        LocalDateTime.now().plusDays(2).format(dateFormatter),
-                        RentDataOrderPage.twoDaysRentText,
-                        RentDataOrderPage.scooterColorGrayId,
+                        LocalDateTime.now().plusDays(2).format(DATE_FORMATTER),
+                        RentDataOrderPage.TWO_DAYS_RENT_TEXT,
+                        RentDataOrderPage.SCOOTER_COLOR_GRAY_ID,
                         "Жду самик!",
-                        MainPage.bottomOrderButtonName
+                        MainPage.BOTTOM_ORDER_BUTTON_NAME
                 }
         };
     }
@@ -81,23 +81,23 @@ public class OrderTest extends BaseTest {
         ClientDataOrderPage objClientDataPage = new ClientDataOrderPage(driver);
         RentDataOrderPage objRentDataPage = new RentDataOrderPage(driver);
         objMainPage.clickRemoveCookieButton();
-        if (orderButtonName.equals(MainPage.upperOrderButtonName)) {
+        if (ORDER_BUTTON_NAME.equals(MainPage.UPPER_ORDER_BUTTON_NAME)) {
             objMainPage.clickUpperOrderButton();
-        } else if (orderButtonName.equals(MainPage.bottomOrderButtonName)) {
+        } else if (ORDER_BUTTON_NAME.equals(MainPage.BOTTOM_ORDER_BUTTON_NAME)) {
             objMainPage.clickBottomOrderButton();
         }
         objClientDataPage.setUpClientDataAndClickNext(
-                username,
-                userLastName,
-                userAddress,
-                metroStationId,
-                userPhoneNumber
+                USERNAME,
+                USER_LAST_NAME,
+                USER_ADDRESS,
+                METRO_STATION_ID,
+                USER_PHONE_NUMBER
         );
-        objRentDataPage.orderScooter(date, rentDaysText, scooterColorId, comment);
+        objRentDataPage.orderScooter(DATE, RENT_DAYS_TEXT, SCOOTER_COLOR, COMMENT);
         String actualText = objRentDataPage.getStatusButtonText();
-        Assert.assertEquals("Text in status button doesn't match!", expectedText, actualText);
+        Assert.assertEquals("Text in status button doesn't match!", EXPECTED_TEXT, actualText);
     }
 
-    private static final String expectedText = "Посмотреть статус";
-    private static final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
+    private static final String EXPECTED_TEXT = "Посмотреть статус";
+    private static final DateTimeFormatter DATE_FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 }

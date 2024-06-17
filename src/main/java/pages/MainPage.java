@@ -16,47 +16,47 @@ public class MainPage extends BasePage {
     }
 
     // Локатор для кнопки "Да все привыкли"
-    private static final String cookieButtonId = "rcc-confirm-button";
+    private static final String COOKIE_BUTTON_ID = "rcc-confirm-button";
 
     // Блок "Вопросы о важном"
     // Локатор для блока дроп-даунов "Вопросы о важном"
-    private static final String accordionItemXpathMask = ".//div[@id='accordion__heading-%d']";
+    private static final String ACCORDION_ITEM_XPATH_MASK = ".//div[@id='accordion__heading-%d']";
     // Локатор для ответов на вопросы о важном
-    private static final String accordionItemTextXpathMask = ".//div[@id='accordion__panel-%d']";
+    private static final String ACCORDION_ITEM_TEXT_XPATH_MASK = ".//div[@id='accordion__panel-%d']";
     // Локатор для тайтла блока "Вопросы о важном"
-    private static final String questionsBlockXpath = ".//div[@class='Home_SubHeader__zwi_E' and text()='Вопросы о важном']";
+    private static final String QUESTIONS_BLOCK_XPATH = ".//div[@class='Home_SubHeader__zwi_E' and text()='Вопросы о важном']";
 
     // Кнопки "Заказать"
     // Локатор для верхней кнопки
-    private static final String upperOrderButtonXpath = ".//button[@class='Button_Button__ra12g' and text()='Заказать']";
+    private static final String UPPER_ORDER_BUTTON_XPATH = ".//button[@class='Button_Button__ra12g' and text()='Заказать']";
     // Локатор для нижней кнопки
-    private static final String bottomOrderButtonXpath = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']";
+    private static final String BOTTOM_ORDER_BUTTON_XPATH = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Заказать']";
 
     public void clickRemoveCookieButton() {
-        driver.findElement(By.id(cookieButtonId)).click();
+        driver.findElement(By.id(COOKIE_BUTTON_ID)).click();
     }
 
     public void scrollTillQuestionsBlock() {
-        WebElement element = driver.findElement(By.xpath(questionsBlockXpath));
+        WebElement element = driver.findElement(By.xpath(QUESTIONS_BLOCK_XPATH));
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public void clickAccordionItem(int accordionItemId) {
-        String accordionItemXpath = String.format(accordionItemXpathMask, accordionItemId);
+        String accordionItemXpath = String.format(ACCORDION_ITEM_XPATH_MASK, accordionItemId);
         new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.xpath(accordionItemXpath)));
         driver.findElement(By.xpath(accordionItemXpath)).click();
     }
 
     public String getAccordionItemText(int accordionItemId) {
-        return driver.findElement(By.xpath(String.format(accordionItemTextXpathMask, accordionItemId))).getText();
+        return driver.findElement(By.xpath(String.format(ACCORDION_ITEM_TEXT_XPATH_MASK, accordionItemId))).getText();
     }
 
     public void clickUpperOrderButton() {
-        driver.findElement(By.xpath(upperOrderButtonXpath)).click();
+        driver.findElement(By.xpath(UPPER_ORDER_BUTTON_XPATH)).click();
     }
 
     public void clickBottomOrderButton() {
-        driver.findElement(By.xpath(bottomOrderButtonXpath)).click();
+        driver.findElement(By.xpath(BOTTOM_ORDER_BUTTON_XPATH)).click();
     }
 
     public void openAnswer(int accordionItemId) {
@@ -64,6 +64,6 @@ public class MainPage extends BasePage {
         clickAccordionItem(accordionItemId);
     }
 
-    public static final String upperOrderButtonName = "upperOrderButton";
-    public static final String bottomOrderButtonName = "bottomOrderButton";
+    public static final String UPPER_ORDER_BUTTON_NAME = "upperOrderButton";
+    public static final String BOTTOM_ORDER_BUTTON_NAME = "bottomOrderButton";
 }

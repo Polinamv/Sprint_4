@@ -14,40 +14,40 @@ public class RentDataOrderPage extends BasePage {
     }
 
     // Локатор для ожидаемого результата: появление текста "Про аренду"
-    private static final String orderTitleClassName = "Order_Header__BZXOb";
+    private static final String ORDER_TITLE_CLASS_NAME = "Order_Header__BZXOb";
 
     // Локатор для поля календаря
-    private static final String dateFieldInputXpath = ".//input[@placeholder='* Когда привезти самокат']";
+    private static final String DATE_FIELD_INPUT_XPATH = ".//input[@placeholder='* Когда привезти самокат']";
     // Локатор для поля срока аренды
-    private static final String rentDaysFieldClassName = "Dropdown-arrow";
+    private static final String RENT_DAYS_FIELD_CLASS_NAME = "Dropdown-arrow";
     // Локатор для выбора дней аренды
-    private static final String rentDaysXpathMask = ".//div[@class='Dropdown-menu']/div[text()='%s']";
+    private static final String RENT_DAYS_XPATH_MASK = ".//div[@class='Dropdown-menu']/div[text()='%s']";
     // Локатор для комментария для курьера
-    private static final String commentForCourierXpath = ".//input[@placeholder='Комментарий для курьера']";
+    private static final String COMMENT_FOR_COURIER_XPATH = ".//input[@placeholder='Комментарий для курьера']";
     // Локатор для кнопки "Заказать"
-    private static final String orderButtonXpath = ".//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']";
+    private static final String ORDER_BUTTON_XPATH = ".//div[@class='Order_Buttons__1xGrp']/button[text()='Заказать']";
 
     // Локатор для ожидаемого результата: появление модального окна "Хотите оформить заказ?"
-    private static final String orderModalWindowClassName = "Order_ModalHeader__3FDaJ";
+    private static final String ORDER_MODAL_WINDOW_CLASS_NAME = "Order_ModalHeader__3FDaJ";
     // Локатор для кнопки "Да" в модальном окне
-    private static final String yesButtonXpath = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']";
+    private static final String YES_BUTTON_XPATH = ".//button[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']";
 
     // Локатор для ожидаемого результата: появилось модальное окно об успешном создании заказа
-    private static final String orderIsProcessedClassName = "Order_ModalHeader__3FDaJ";
+    private static final String ORDER_IS_PROCESSED_CLASS_NAME = "Order_ModalHeader__3FDaJ";
     // Локатор для кнопки "Посмотреть статус"
-    private static final String statusButtonXpath = ".//button[text()='Посмотреть статус']";
+    private static final String STATUS_BUTTON_XPATH = ".//button[text()='Посмотреть статус']";
 
     public void waitTitleToLoad() {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(orderTitleClassName)));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(ORDER_TITLE_CLASS_NAME)));
     }
 
     public void setDate(String date) {
-        driver.findElement(By.xpath(dateFieldInputXpath)).sendKeys(date);
+        driver.findElement(By.xpath(DATE_FIELD_INPUT_XPATH)).sendKeys(date);
     }
 
     public void selectRentDays(String rentDaysText) {
-        driver.findElement(By.className(rentDaysFieldClassName)).click();
-        driver.findElement(By.xpath(String.format(rentDaysXpathMask, rentDaysText))).click();
+        driver.findElement(By.className(RENT_DAYS_FIELD_CLASS_NAME)).click();
+        driver.findElement(By.xpath(String.format(RENT_DAYS_XPATH_MASK, rentDaysText))).click();
     }
 
     public void selectScooterColor(String scooterColorId) {
@@ -55,27 +55,27 @@ public class RentDataOrderPage extends BasePage {
     }
 
     public void setCommentForCourier(String comment) {
-        driver.findElement(By.xpath(commentForCourierXpath)).sendKeys(comment);
+        driver.findElement(By.xpath(COMMENT_FOR_COURIER_XPATH)).sendKeys(comment);
     }
 
     public void clickOrderButton() {
-        driver.findElement(By.xpath(orderButtonXpath)).click();
+        driver.findElement(By.xpath(ORDER_BUTTON_XPATH)).click();
     }
 
     public void waitModalWindowToLoad() {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(orderModalWindowClassName)));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(ORDER_MODAL_WINDOW_CLASS_NAME)));
     }
 
     public void clickYesButton() {
-        driver.findElement(By.xpath(yesButtonXpath)).click();
+        driver.findElement(By.xpath(YES_BUTTON_XPATH)).click();
     }
 
     public void waitSuccessfullyCreatedOrderWindow() {
-        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(orderIsProcessedClassName)));
+        new WebDriverWait(driver, Duration.ofSeconds(3)).until(ExpectedConditions.visibilityOfElementLocated(By.className(ORDER_IS_PROCESSED_CLASS_NAME)));
     }
 
     public String getStatusButtonText() {
-        return driver.findElement(By.xpath(statusButtonXpath)).getText();
+        return driver.findElement(By.xpath(STATUS_BUTTON_XPATH)).getText();
     }
 
     public void orderScooter(String date, String rentDaysText, String scooterColorId, String comment) {
@@ -90,8 +90,8 @@ public class RentDataOrderPage extends BasePage {
         waitSuccessfullyCreatedOrderWindow();
     }
 
-    public static final String oneDayRentText = "сутки";
-    public static final String twoDaysRentText = "двое суток";
-    public static final String scooterColorBlackId = "black";
-    public static final String scooterColorGrayId = "grey";
+    public static final String ONE_DAY_RENT_TEXT = "сутки";
+    public static final String TWO_DAYS_RENT_TEXT = "двое суток";
+    public static final String SCOOTER_COLOR_BLACK_ID = "black";
+    public static final String SCOOTER_COLOR_GRAY_ID = "grey";
 }

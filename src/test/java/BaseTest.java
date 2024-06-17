@@ -13,11 +13,13 @@ public abstract class BaseTest {
 
     @Before
     public void setup() {
-        driver.get("https://qa-scooter.praktikum-services.ru/");
+        driver.get(URL);
     }
 
     @After
     public void clearUp() {
         driver.quit();
     }
+
+    protected static final String URL = "https://qa-scooter.praktikum-services.ru/";
 }
