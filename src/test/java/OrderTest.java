@@ -10,39 +10,39 @@ import java.time.format.DateTimeFormatter;
 
 public class OrderTest extends BaseTest {
 
-    private final String USERNAME;
-    private final String USER_LAST_NAME;
-    private final String USER_ADDRESS;
-    private final int METRO_STATION_ID;
-    private final String USER_PHONE_NUMBER;
-    private final String DATE;
-    private final String RENT_DAYS_TEXT;
-    private final String SCOOTER_COLOR;
-    private final String COMMENT;
-    private final String ORDER_BUTTON_NAME;
+    private final String username;
+    private final String userLastName;
+    private final String userAddress;
+    private final int metroStationId;
+    private final String userPhoneNumber;
+    private final String date;
+    private final String rentDaysText;
+    private final String scooterColor;
+    private final String comment;
+    private final String orderButtonName;
 
     public OrderTest(
-            String USERNAME,
-            String USER_LAST_NAME,
-            String USER_ADDRESS,
-            int METRO_STATION_ID,
-            String USER_PHONE_NUMBER,
-            String DATE,
-            String RENT_DAYS_TEXT,
-            String SCOOTER_COLOR,
-            String COMMENT,
-            String ORDER_BUTTON_NAME
+            String username,
+            String userLastName,
+            String userAddress,
+            int metroStationId,
+            String userPhoneNumber,
+            String date,
+            String rentDaysText,
+            String scooterColor,
+            String comment,
+            String orderButtonName
     ) {
-        this.USERNAME = USERNAME;
-        this.USER_LAST_NAME = USER_LAST_NAME;
-        this.USER_ADDRESS = USER_ADDRESS;
-        this.METRO_STATION_ID = METRO_STATION_ID;
-        this.USER_PHONE_NUMBER = USER_PHONE_NUMBER;
-        this.DATE = DATE;
-        this.RENT_DAYS_TEXT = RENT_DAYS_TEXT;
-        this.SCOOTER_COLOR = SCOOTER_COLOR;
-        this.COMMENT = COMMENT;
-        this.ORDER_BUTTON_NAME = ORDER_BUTTON_NAME;
+        this.username = username;
+        this.userLastName = userLastName;
+        this.userAddress = userAddress;
+        this.metroStationId = metroStationId;
+        this.userPhoneNumber = userPhoneNumber;
+        this.date = date;
+        this.rentDaysText = rentDaysText;
+        this.scooterColor = scooterColor;
+        this.comment = comment;
+        this.orderButtonName = orderButtonName;
     }
 
     @Parameterized.Parameters
@@ -81,19 +81,19 @@ public class OrderTest extends BaseTest {
         ClientDataOrderPage objClientDataPage = new ClientDataOrderPage(driver);
         RentDataOrderPage objRentDataPage = new RentDataOrderPage(driver);
         objMainPage.clickRemoveCookieButton();
-        if (ORDER_BUTTON_NAME.equals(MainPage.UPPER_ORDER_BUTTON_NAME)) {
+        if (orderButtonName.equals(MainPage.UPPER_ORDER_BUTTON_NAME)) {
             objMainPage.clickUpperOrderButton();
-        } else if (ORDER_BUTTON_NAME.equals(MainPage.BOTTOM_ORDER_BUTTON_NAME)) {
+        } else if (orderButtonName.equals(MainPage.BOTTOM_ORDER_BUTTON_NAME)) {
             objMainPage.clickBottomOrderButton();
         }
         objClientDataPage.setUpClientDataAndClickNext(
-                USERNAME,
-                USER_LAST_NAME,
-                USER_ADDRESS,
-                METRO_STATION_ID,
-                USER_PHONE_NUMBER
+                username,
+                userLastName,
+                userAddress,
+                metroStationId,
+                userPhoneNumber
         );
-        objRentDataPage.orderScooter(DATE, RENT_DAYS_TEXT, SCOOTER_COLOR, COMMENT);
+        objRentDataPage.orderScooter(date, rentDaysText, scooterColor, comment);
         String actualText = objRentDataPage.getStatusButtonText();
         Assert.assertEquals("Text in status button doesn't match!", EXPECTED_TEXT, actualText);
     }

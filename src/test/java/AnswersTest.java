@@ -5,12 +5,12 @@ import org.junit.runners.Parameterized;
 
 public class AnswersTest extends BaseTest {
 
-    private final int ACCORDION_ITEM_ID;
-    private final String EXPECTED_TEXT;
+    private final int accordionItemId;
+    private final String expectedText;
 
     public AnswersTest(int accordionItemId, String expectedText) {
-        this.ACCORDION_ITEM_ID = accordionItemId;
-        this.EXPECTED_TEXT = expectedText;
+        this.accordionItemId = accordionItemId;
+        this.expectedText = expectedText;
     }
 
     @Parameterized.Parameters
@@ -30,8 +30,8 @@ public class AnswersTest extends BaseTest {
     @Test
     public void testGetAccordionText() {
         MainPage objMainPage = new MainPage(driver);
-        objMainPage.openAnswer(ACCORDION_ITEM_ID);
-        String actualText = objMainPage.getAccordionItemText(ACCORDION_ITEM_ID);
-        Assert.assertEquals("Text in answers block with Id = " + ACCORDION_ITEM_ID + " doesn't match!", EXPECTED_TEXT, actualText);
+        objMainPage.openAnswer(accordionItemId);
+        String actualText = objMainPage.getAccordionItemText(accordionItemId);
+        Assert.assertEquals("Text in answers block with Id = " + accordionItemId + " doesn't match!", expectedText, actualText);
     }
 }
